@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIGMADIGITAL</title>
+    <link href="./output.css" rel="stylesheet">
+    <style>
+        /* Общие стили для карточек */
+        .card {
+            position: relative;
+            overflow: hidden;
+            background-color: #f5f5f5; /* Цвет фона карточки */
+            border-radius: 8px;
+            width: 100%; /* По умолчанию занимает всю доступную ширину */
+            padding: 16px;
+            box-sizing: border-box;
+            color: white;
+            aspect-ratio: 9 / 3; /* Прямоугольная форма по умолчанию */
+            transition: all 0.3s ease; /* Плавный переход */
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1; /* Текст будет поверх изображения */
+            text-align: left; /* Выравнивание текста по левому краю */
+            width: 100%; /* Обеспечивает, что текст занимает всю доступную ширину */
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+            z-index: 0; /* Изображение будет под текстом */
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-strategy::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/img/StrategyCard.svg');
+            background-size: cover;
+            background-position: center;
+            z-index: 1; /* Изображение будет выше */
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .card-strategy::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(139.612deg, #F8BDC5 0%, #F71735 100%);
+            z-index: 0; /* Градиент будет под изображением */
+        }
+
+        .card-web::before {
+            background-image: url('/path/to/web-image.jpg'); /* Замените на путь к изображению для Web */
+        }
+
+        .card-design::before {
+            background-image: url('/path/to/design-image.jpg'); /* Замените на путь к изображению для Design */
+        }
+
+        .card-product::before {
+            background-image: url('/path/to/product-image.jpg'); /* Замените на путь к изображению для Product */
+        }
+
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem; /* Отступы между рядами карточек */
+        }
+
+        .cards-row {
+            display: flex;
+            gap: 1rem; /* Отступы между карточками в ряду */
+            transition: all 0.3s ease;
+        }
+
+        .cards-row:hover .card {
+            aspect-ratio: 1 / 1; /* Делает все карточки в ряду квадратными при наведении на ряд */
+        }
+
+        .bg-blue-300-hover:hover {
+            background-color: #bfdbfe; /* Цвет фона при наведении */
+        }
+
+        /* Стили для мобильного меню */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 1000; /* Должен быть выше остальных элементов */
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            transform: translateX(-100%);
+        }
+
+        .mobile-menu.open {
+            display: block;
+            transform: translateX(0);
+        }
+
+        .mobile-menu .menu-content {
+            padding: 20px;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 15px 0;
+            font-size: 1.5rem;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .mobile-menu a:hover {
+            color: #000;
+        }
+
+        .menu-btn {
+            display: none;
+            cursor: pointer;
+            position: static;
+            top: 15px;
+            right: 15px;
+            z-index: 1001; /* Должен быть выше мобильного меню */
+        }
+
+        .menu-btn div {
+            width: 30px;
+            height: 3px;
+            background: #333;
+            margin: 6px 0;
+            transition: 0.3s;
+        }
+
+        .menu-btn.open div:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-btn.open div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-btn.open div:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+
+            .desktop-menu {
+                display: none;
+            }
+
+            .mobile-menu a {
+                font-size: 1.2rem;
+            }
+
+            .hide-on-mobile {
+                display: none; /* Скрыть на мобильной версии */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="w-full h-full p-5 bg-stone-900 flex flex-col gap-5">
+        <!-- Основное содержимое -->
+        <div class="w-full flex flex-col gap-5">
+            <div class="w-full p-5 bg-white rounded-md flex flex-col gap-2.5">
+                <!-- Верхняя часть с логотипом и меню -->
+                <div class="w-full flex gap-2.5 items-center relative">
+                    <div class="w-[189px] h-[90px] p-5 bg-zinc-100 rounded-md flex justify-center items-center">
+                        <img src="/img/BigmaLogo.svg" alt="Bigma Logo">
+                    </div>
+                    <div class="flex-grow flex gap-2.5 items-center">
+                        <div class="flex-grow h-[90px] bg-zinc-100 rounded-md flex justify-center items-center">
+                            <img src="/img/flag-es.svg" alt="Spanish Flag">
+                        </div>
+                        <div class="flex-full h-[90px] bg-zinc-100 rounded-md flex items-center justify-between px-5">
+                            <nav class="hidden desktop-menu flex gap-10 items-center">
+                                <a href="#" class="text-stone-900 text-2xl font-normal px-2">home</a>
+                                <a href="#" class="text-stone-900/opacity-40 text-2xl font-normal px-2">services</a>
+                                <a href="#" class="text-stone-900/opacity-40 text-2xl font-normal px-2">work</a>
+                                <a href="#" class="text-stone-900/opacity-40 text-2xl font-normal px-2">about</a>
+                                <a href="#" class="text-stone-900/opacity-40 text-2xl font-normal px-2">resources</a>
+                                <a href="#" class="text-stone-900/opacity-40 text-2xl font-normal px-2">contact</a>
+                            </nav>
+                            <div class="w-24 h-11 px-5 py-2.5 bg-rose-600 rounded-3xl flex justify-center items-center hide-on-mobile">
+                                <span class="text-zinc-100 text-2xl font-medium">brief</span>
+                            </div>
+                            <div class="menu-btn flex ">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- Секция с заголовком и основным изображением -->
+                <div class="w-full h-[555px] p-5 bg-zinc-100 rounded-md border flex flex-col justify-end gap-2.5">
+                    <div class="flex flex-col justify-center items-start gap-5">
+                        <h1 class="text-black text-3xl font-medium">Digital Empathy</h1>
+                    </div>
+                </div>
+                <!-- Карточки -->
+                <div class="cards-container">
+                    <div class="cards-row">
+                        <!-- Блок 1: Strategy -->
+                        <div class="card card-strategy bg-zinc-100 rounded-md flex flex-col justify-end gap-5 p-5 transition-transform duration-300">
+                            <div class="card-content">
+                                <div class="text-stone-900 text-2xl font-medium leading-normal">Strategy</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Блок 2: Design -->
+                        <div class="card card-web bg-zinc-100 rounded-md flex flex-col justify-end gap-5 p-5 transition-transform duration-300 hover:bg-blue-300">
+                            <div class="card-content">
+                                <div class="text-stone-900 text-2xl font-medium leading-normal">Design</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cards-row">
+                        <!-- Блок 3: Web -->
+                        <div class="card card-design bg-zinc-100 rounded-md flex flex-col justify-end gap-5 p-5 transition-transform duration-300 hover:bg-blue-300">
+                            <div class="card-content">
+                                <div class="text-stone-900 text-2xl font-medium leading-normal">Web</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Блок 4: Product -->
+                        <div class="card card-product bg-zinc-100 rounded-md flex flex-col justify-end gap-5 p-5 transition-transform duration-300 hover:bg-blue-300">
+                            <div class="card-content">
+                                <div class="text-stone-900 text-2xl font-medium leading-normal">Product</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Нижняя часть -->
+                <div class="w-full h-20 p-5 bg-stone-900 rounded-lg border flex justify-between items-center">
+                    <span class="text-white text-base font-light">Complex solutions for your business growth</span>
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-10 h-10 bg-emerald-400 rounded border-2 border-zinc-100 flex justify-center items-center">
+                            <div class="w-5 h-5 relative">
+                                <div class="w-4 h-4 absolute bg-stone-900 rounded-full border-2 border-stone-900"></div>
+                                <div class="w-4 h-4 absolute"></div>
+                            </div>
+                        </div>
+                        <div class="w-10 h-10 bg-blue-400 rounded border-2 border-zinc-100 flex justify-center items-center">
+                            <div class="w-3 h-5 relative"></div>
+                        </div>
+                        <div class="w-10 h-10 bg-gradient-to-tl from-rose-600 to-blue-400 rounded border-2 border-zinc-100 flex justify-center items-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Мобильное меню -->
+        <div id="mobileMenu" class="mobile-menu">
+            <div class="menu-content">
+                <a href="#">home</a>
+                <a href="#">services</a>
+                <a href="#">work</a>
+                <a href="#">about</a>
+                <a href="#">resources</a>
+                <a href="#">contact</a>
+            </div>
+        </div>
+        <!-- Дополнительные секции -->
+        <div class="w-full h-96 flex flex-col gap-10">
+            <div class="h-36 flex flex-col gap-10">
+                <p class="w-56 opacity-60 text-white text-sm font-light">Recopile un paquete de servicios específicamente para su caso.</p>
+                <h2 class="self-stretch text-white text-3xl font-medium">¿en qué etapa se encuentra tu proyecto?</h2>
+            </div>
+            <div class="self-stretch h-44 flex flex-col gap-1">
+                <div class="self-stretch p-5 bg-white rounded border border-zinc-100 flex items-center gap-5">
+                    <div class="w-1.5 h-1.5 bg-rose-600 rounded-full"></div>
+                    <span class="text-stone-900 text-lg font-medium">Solo idea</span>
+                </div>
+                <div class="self-stretch p-5 bg-white rounded border border-zinc-100 flex items-center gap-5">
+                    <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+                    <span class="text-stone-900 text-lg font-medium">Proyecto en progreso</span>
+                </div>
+                <div class="self-stretch p-5 bg-white rounded border border-zinc-100 flex items-center gap-5">
+                    <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
+                    <span class="text-stone-900 text-lg font-medium">Negocio en funcionamiento</span>
+                </div>
+            </div>
+        </div>
+        <div class="w-full h-72 flex-col justify-start items-start gap-1 inline-flex">
+            <div class="self-stretch h-72 p-5 bg-white rounded border border-zinc-100 flex-col justify-between items-start flex">
+                <div class="w-full justify-start items-start inline-flex flex-wrap gap-0">
+                    <div class="px-2.5 py-1 bg-zinc-100 rounded-3xl border border-white flex-shrink-0">
+                        <div class="text-stone-900 text-base font-normal font-['TT Firs Neue Trl'] leading-tight whitespace-nowrap">social media</div>
+                    </div>
+                    <div class="px-2.5 py-1 bg-zinc-100 rounded-3xl border border-white flex-shrink-0">
+                        <div class="text-stone-900 text-base font-normal font-['TT Firs Neue Trl'] leading-tight whitespace-nowrap">seo</div>
+                    </div>
+                    <div class="px-2.5 py-1 bg-zinc-100 rounded-3xl border border-white flex-shrink-0">
+                        <div class="text-stone-900 text-base font-normal font-['TT Firs Neue Trl'] leading-tight whitespace-nowrap">marketing strategy</div>
+                    </div>
+                    <div class="px-2.5 py-1 bg-zinc-100 rounded-3xl border border-white flex-shrink-0">
+                        <div class="text-stone-900 text-base font-normal font-['TT Firs Neue Trl'] leading-tight whitespace-nowrap">product</div>
+                    </div>
+                    <div class="px-2.5 py-1 bg-zinc-100 rounded-3xl border border-white flex-shrink-0">
+                        <div class="text-stone-900 text-base font-normal font-['TT Firs Neue Trl'] leading-tight whitespace-nowrap">website</div>
+                    </div>
+                    <div class="px-2.5 py-1 bg-rose-600 rounded-3xl border border-white flex-shrink-0">
+                        <div class="text-white text-base font-normal font-['TT Firs Neue Trl'] leading-tight whitespace-nowrap">improvements checklist</div>
+                    </div>
+                </div>
+                <div class="self-stretch justify-between items-center inline-flex">
+                    <div class="text-stone-900 text-2xl font-medium font-['TT Firs Neue Trl'] leading-tight">audit</div>
+                    <div class="w-5 h-5 bg-stone-900 rounded-3xl border border-zinc-100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.querySelector('.menu-btn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+                menuButton.classList.toggle('open');
+            });
+        });
+    </script>
+</body>
+</html>
