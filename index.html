@@ -5,46 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BIGMADIGITAL</title>
     <link href="./output.css" rel="stylesheet">
-    
+    <style>
+
+#mobileMenu {
+    margin-top: 130px; /* Отступ вниз от верхней границы контейнера */
+}
+
+        .shuffle-hover-inside {
+          text-transform: lowercase;
+          transition: all 0.3s ease;
+        }
+        .shuffle-hover .hover-bg:hover {
+          background-color: #f71735;
+        }
+        .shuffle-hover .hover-text:hover {
+          color: white;
+        }
+      </style>
 </head>
-<body class="w-full h-full p-5 bg-stone-900 flex flex-col gap-5">
-    <!-- Мобильное меню -->
-    <div id="mobileMenu" class="fixed inset-0 bg-white z-50 transform -translate-x-full transition-transform duration-300 overflow-y-auto lg:hidden">
+<body class="w-full h-full p-5 bg-stone-900 flex flex-col gap-50">
+     <!-- Мобильное меню -->
+     <div id="mobileMenu" class="fixed inset-0 bg-white transform -translate-x-full transition-transform duration-300 overflow-y-auto lg:hidden pt-95px z-50">
         <div class="p-5">
-            <a href="#" class="block py-4 text-lg text-gray-800">home</a>
-            <a href="#" class="block py-4 text-lg text-gray-800">services</a>
-            <a href="#" class="block py-4 text-lg text-gray-800">work</a>
-            <a href="#" class="block py-4 text-lg text-gray-800">about</a>
-            <a href="#" class="block py-4 text-lg text-gray-800">resources</a>
-            <a href="#" class="block py-4 text-lg text-gray-800">contact</a>
-            <div class="w-24 h-11 px-5 py-2.5 bg-rose-600 rounded-3xl flex justify-center items-center mt-5">
-                <span class="text-white text-2xl font-medium">brief</span>
+            <div class="grid grid-cols-2 gap-4 w-full max-w-screen-lg">
+                <!-- Карточки меню -->
+                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                    <div class="w-[190px] h-[191px] p-2.5 rounded-[10px] justify-end items-start gap-2.5 flex">
+                        <div class="w-5 h-5 px-3.5 py-2.5 bg-[#f71735] rounded-[50px] border-2 border-[#f0f0f0] flex items-center justify-center">
+                            <div class="text-[#f0f0f0] text-xs font-medium font-['TT Firs Neue Trl'] leading-3">1</div>
+                        </div>
+                    </div>
+                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">brief</div>
+                    </div>
+                </div>
+                
+                <!-- Повторяющиеся карточки меню -->
+                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">contact</div>
+                    </div>
+                </div>
+                
+                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">home</div>
+                    </div>
+                </div>
+                
+                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">resources</div>
+                    </div>
+                </div>
+                
+                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                    <div class="w-[190px] h-[191px] p-2.5 rounded-[10px] justify-end items-start gap-2.5 flex">
+                        <div class="w-5 h-5 px-3.5 py-2.5 bg-[#f71735] rounded-[50px] border-2 border-[#f0f0f0] flex items-center justify-center">
+                            <div class="text-[#f0f0f0] text-xs font-medium font-['TT Firs Neue Trl'] leading-3">2</div>
+                        </div>
+                    </div>
+                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">about</div>
+                    </div>
+                </div>
+                
+                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">work</div>
+                    </div>
+                </div>
+                
+                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">about</div>
+                    </div>
+                </div>
+                
+                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                    <div class="w-[190px] h-[191px] p-2.5 rounded-[10px] justify-end items-start gap-2.5 flex">
+                        <div class="w-5 h-5 px-3.5 py-2.5 bg-[#f71735] rounded-[50px] border-2 border-[#f0f0f0] flex items-center justify-center">
+                            <div class="text-[#f0f0f0] text-xs font-medium font-['TT Firs Neue Trl'] leading-3">1</div>
+                        </div>
+                    </div>
+                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">brief</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Основное содержимое -->
     <div class="w-full flex flex-col gap-5">
-        <div class="w-full p-5 bg-white rounded-md flex flex-col gap-2.5">
-            <!-- Верхняя часть с логотипом, языком и меню -->
-            <div class="w-full flex items-center gap-2.5">
-                <!-- Секция с логотипом, которая растягивается до 1280px и фиксируется после -->
+        <div class="z-30">
+        <!-- Верхняя часть с логотипом, языком и меню -->
+        <div class="w-full p-5 bg-white rounded-md flex flex-col gap-2.5 ">
+            <div class="w-full flex items-center gap-2.5 z-100">
                 <div class="flex-grow xl:flex-none xl:w-[auto] h-[90px] p-5 bg-gray-100 rounded-md flex items-center">
                     <div class="xl:w-full">
                         <img src="/img/BigmaLogo.svg" alt="Bigma Logo">
                     </div>
                 </div>
 
-                <!-- Секции с флагом и навигацией, находятся справа -->
                 <div class="flex items-center gap-2.5 xl:flex-grow xl:justify-between">
-                    <!-- Секция с флагом -->
                     <div class="w-[90px] h-[90px] p-5 bg-gray-100 rounded-md flex justify-center items-center">
                         <div class="flex-none">
                             <img src="/img/flag-es.svg" alt="Spanish Flag">
                         </div>
                     </div>
 
-                    <!-- Секция с навигацией -->
                     <div class="w-[90px] h-[90px] bg-gray-100 rounded-md flex items-center px-5 xl:flex-grow xl:justify-between">
                         <nav class="gap-10 items-center hidden xl:flex flex-grow">
                             <a href="#" class="text-stone-900 text-2xl font-normal px-2">home</a>
@@ -59,7 +129,7 @@
                                 <span class="text-white text-2xl font-medium">brief</span>
                             </div>
                         </div>
-                        <div class="block xl:hidden menu-btn">
+                        <div class="block xl:hidden menu-btn" onclick="toggleMenu()">
                             <div class="w-8 h-0.5 bg-gray-800 mb-1"></div>
                             <div class="w-8 h-0.5 bg-gray-800 mb-1"></div>
                             <div class="w-8 h-0.5 bg-gray-800"></div>
@@ -67,7 +137,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Секция с заголовком и основным изображением -->
             <div class="w-full h-[555px] p-5 bg-gray-100 rounded-md border flex flex-col justify-end gap-2.5">
                 <div class="flex flex-col justify-center items-start gap-5">
@@ -124,6 +193,8 @@
                 </div>
             </div>
         </div>
+
+        </div>
     </div>
 
     <!-- Дополнительные секции -->
@@ -147,6 +218,8 @@
             </div>
         </div>
     </div>
+
+
     <div class="w-full h-72 flex flex-col justify-start items-start gap-1">
         <div class="self-stretch h-72 p-5 bg-white rounded border border-gray-100 flex flex-col justify-between items-start">
             <div class="w-full flex-wrap flex">
@@ -174,7 +247,7 @@
                 <div class="w-5 h-5 bg-stone-900 rounded-3xl border border-gray-100"></div>
             </div>
         </div>
-    </div>
+
 
     <script>
         const menuBtn = document.querySelector('.menu-btn');
@@ -186,5 +259,68 @@
             mobileMenu.classList.toggle('-translate-x-full');
         });
     </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    jQuery(document).ready(function($) {
+      var shuffleElement = $('.shuffle-hover .tn-atom');
+      shuffleElement.each(function() {
+        $(this).attr('data-text', $(this).text());
+      });
+
+      var animationInProgress = false;
+
+      shuffleElement.mouseenter(function() {
+        if (animationInProgress) return;
+
+        var element = $(this);
+        var originalText = element.data('text');
+        var animationDuration = 500;
+        animationInProgress = true;
+
+        shuffleText(element, originalText, animationDuration, function() {
+          animationInProgress = false;
+        });
+      });
+
+      shuffleElement.mouseleave(function() {
+        var element = $(this);
+        var originalText = element.data('text');
+
+        element.text(originalText.toLowerCase());
+      });
+
+      function shuffleText(element, originalText, duration, onComplete) {
+        var elementTextArray = originalText.split('');
+        var currentIndex = 0;
+
+        function shuffleStep() {
+          if (currentIndex < elementTextArray.length) {
+            var randomIndex = Math.floor(Math.random() * elementTextArray.length);
+            var temp = elementTextArray[currentIndex];
+            elementTextArray[currentIndex] = elementTextArray[randomIndex];
+            elementTextArray[randomIndex] = temp;
+
+            // Хаотичное изменение регистра
+            for (var i = 0; i < elementTextArray.length; i++) {
+              elementTextArray[i] = Math.random() > 0.5 ? elementTextArray[i].toUpperCase() : elementTextArray[i].toLowerCase();
+            }
+
+            element.text(elementTextArray.join(''));
+            currentIndex++;
+            setTimeout(shuffleStep, duration / elementTextArray.length);
+          } else {
+            // Хаотичное изменение регистра для финального текста
+            var finalTextArray = originalText.split('').map(char =>
+              Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase()
+            );
+            element.text(finalTextArray.join(''));
+            onComplete();
+          }
+        }
+
+        shuffleStep();
+      }
+    });
+  </script>
 </body>
 </html>
