@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,320 +8,712 @@
     <link href="./output.css" rel="stylesheet">
     <style>
 
-#mobileMenu {
-    margin-top: 130px; /* Отступ вниз от верхней границы контейнера */
-}
+body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Цвет фона изменен на белый */
+            overflow-x: hidden;
+        }
 
-        .shuffle-hover-inside {
-          text-transform: lowercase;
-          transition: all 0.3s ease;
+
+        .section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #151912;
+            text-align: center;
         }
-        .shuffle-hover .hover-bg:hover {
-          background-color: #f71735;
+
+        .section > div {
+            width: 90%;
         }
-        .shuffle-hover .hover-text:hover {
-          color: white;
+
+        .section:nth-child(1) {
+            font-size: 20vh;
         }
-      </style>
+
+        @media (max-width: 600px) {
+            .section:nth-child(1) {
+                font-size: 25vw;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .section:nth-child(1) {
+                font-size: 30px;
+            }
+        }
+
+        .section:nth-child(2) {
+            font-size: 10vh;
+        }
+
+        .section:nth-child(3) {
+            font-size: 8vh;
+        }
+
+        .section:nth-child(2) > div {
+            max-width: 800px
+        }
+
+        .section:nth-child(3) > div {
+            max-width: 900px
+        }
+
+        @media (max-width: 750px) {
+            .section:nth-child(2),
+            .section:nth-child(3) {
+                font-size: 9vw;
+            }
+        }
+
+        .section:nth-child(3) a {
+            padding: 0 .3em;
+        }
+
+        canvas#neuro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+            opacity: .95;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: inherit;
+            font-weight: inherit;
+            font-style: inherit;
+        }
+
+        a:hover {
+            font-weight: inherit;
+            text-decoration: none;
+            color: rgb(223, 56, 56);
+        }
+
+        a:active {
+            color: rgb(199, 40, 40);
+        }
+    </style>
 </head>
-<body class="w-full h-full p-5 bg-stone-900 flex flex-col gap-50">
-     <!-- Мобильное меню -->
-     <div id="mobileMenu" class="fixed inset-0 bg-white transform -translate-x-full transition-transform duration-300 overflow-y-auto lg:hidden pt-95px z-50">
-        <div class="p-5">
-            <div class="grid grid-cols-2 gap-4 w-full max-w-screen-lg">
-                <!-- Карточки меню -->
-                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
-                    <div class="w-[190px] h-[191px] p-2.5 rounded-[10px] justify-end items-start gap-2.5 flex">
-                        <div class="w-5 h-5 px-3.5 py-2.5 bg-[#f71735] rounded-[50px] border-2 border-[#f0f0f0] flex items-center justify-center">
-                            <div class="text-[#f0f0f0] text-xs font-medium font-['TT Firs Neue Trl'] leading-3">1</div>
-                        </div>
-                    </div>
-                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
-                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">brief</div>
-                    </div>
-                </div>
-                
-                <!-- Повторяющиеся карточки меню -->
-                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
-                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
-                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">contact</div>
-                    </div>
-                </div>
-                
-                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
-                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
-                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">home</div>
-                    </div>
-                </div>
-                
-                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
-                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
-                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">resources</div>
-                    </div>
-                </div>
-                
-                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
-                    <div class="w-[190px] h-[191px] p-2.5 rounded-[10px] justify-end items-start gap-2.5 flex">
-                        <div class="w-5 h-5 px-3.5 py-2.5 bg-[#f71735] rounded-[50px] border-2 border-[#f0f0f0] flex items-center justify-center">
-                            <div class="text-[#f0f0f0] text-xs font-medium font-['TT Firs Neue Trl'] leading-3">2</div>
-                        </div>
-                    </div>
-                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
-                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">about</div>
-                    </div>
-                </div>
-                
-                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
-                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
-                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">work</div>
-                    </div>
-                </div>
-                
-                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
-                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
-                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">about</div>
-                    </div>
-                </div>
-                
-                <div class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
-                    <div class="w-[190px] h-[191px] p-2.5 rounded-[10px] justify-end items-start gap-2.5 flex">
-                        <div class="w-5 h-5 px-3.5 py-2.5 bg-[#f71735] rounded-[50px] border-2 border-[#f0f0f0] flex items-center justify-center">
-                            <div class="text-[#f0f0f0] text-xs font-medium font-['TT Firs Neue Trl'] leading-3">1</div>
-                        </div>
-                    </div>
-                    <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
-                        <div class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">brief</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Основное содержимое -->
-    <div class="w-full flex flex-col gap-5">
-        <div class="z-30">
-        <!-- Верхняя часть с логотипом, языком и меню -->
-        <div class="w-full p-5 bg-white rounded-md flex flex-col gap-2.5 ">
-            <div class="w-full flex items-center gap-2.5 z-100">
-                <div class="flex-grow xl:flex-none xl:w-[auto] h-[90px] p-5 bg-gray-100 rounded-md flex items-center">
-                    <div class="xl:w-full">
-                        <img src="/img/BigmaLogo.svg" alt="Bigma Logo">
-                    </div>
-                </div>
+    </style>
+</head>
 
-                <div class="flex items-center gap-2.5 xl:flex-grow xl:justify-between">
-                    <div class="w-[90px] h-[90px] p-5 bg-gray-100 rounded-md flex justify-center items-center">
-                        <div class="flex-none">
-                            <img src="/img/flag-es.svg" alt="Spanish Flag">
-                        </div>
-                    </div>
+<body>
 
-                    <div class="w-[90px] h-[90px] bg-gray-100 rounded-md flex items-center px-5 xl:flex-grow xl:justify-between">
-                        <nav class="gap-10 items-center hidden xl:flex flex-grow">
-                            <a href="#" class="text-stone-900 text-2xl font-normal px-2">home</a>
-                            <a href="#" class="text-stone-900/40 text-2xl font-normal px-2">services</a>
-                            <a href="#" class="text-stone-900/40 text-2xl font-normal px-2">work</a>
-                            <a href="#" class="text-stone-900/40 text-2xl font-normal px-2">about</a>
-                            <a href="#" class="text-stone-900/40 text-2xl font-normal px-2">resources</a>
-                            <a href="#" class="text-stone-900/40 text-2xl font-normal px-2">contact</a>
-                        </nav>
-                        <div class="hidden xl:flex flex-none ml-auto">
-                            <div class="w-24 h-11 px-5 py-2.5 bg-rose-600 rounded-3xl flex justify-center items-center">
-                                <span class="text-white text-2xl font-medium">brief</span>
+    <div class="w-full h-full  flex flex-col gap-5">
+        <!-- Мобильное меню -->
+        <div id="mobileMenu"
+            class="fixed inset-0 bg-white transform -translate-x-full transition-transform duration-300 overflow-y-auto z-50 mt-28">
+            <div class="p-5 pt-[15px]">
+                <div class="grid grid-cols-2 gap-2.5 w-full max-w-screen-xl">
+                    <!-- Карточки меню -->
+                    <div
+                        class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover hover:bg-[#f71735]">
+                        <div class="w-[190px] h-[191px] p-2.5 rounded-[10px] justify-end items-start gap-2.5 flex">
+                            <div
+                                class="w-5 h-5 px-3.5 py-2.5 bg-[#f71735] rounded-[50px] border border-[#f0f0f0] flex items-center justify-center">
+                                <div class="text-[#f0f0f0] text-xs font-medium font-['TT Firs Neue Trl'] leading-3">1
+                                </div>
                             </div>
                         </div>
-                        <div class="block xl:hidden menu-btn" onclick="toggleMenu()">
-                            <div class="w-8 h-0.5 bg-gray-800 mb-1"></div>
-                            <div class="w-8 h-0.5 bg-gray-800 mb-1"></div>
-                            <div class="w-8 h-0.5 bg-gray-800"></div>
+                        <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                            <div
+                                class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">
+                                brief</div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- Секция с заголовком и основным изображением -->
-            <div class="w-full h-[555px] p-5 bg-gray-100 rounded-md border flex flex-col justify-end gap-2.5">
-                <div class="flex flex-col justify-center items-start gap-5">
-                    <h1 class="text-black text-3xl font-medium">Digital Empathy</h1>
-                </div>
-            </div>
-            <!-- Карточки -->
-            <div class="flex flex-col gap-2.5">
-                <div class="flex gap-2.5">
-                    <!-- Блок 1: Strategy -->
-                    <div class="relative bg-gray-100 rounded-md flex flex-col justify-end gap-5 p-5 transition-transform duration-300 w-1/2 hover:aspect-square" style="background-image: url('/img/StrategyCard.svg'); background-size: cover; background-position: center;">
-                        <div class="relative z-10">
-                            <div class="text-stone-900 text-2xl font-medium leading-normal">Strategy</div>
+
+                    <!-- Повторяющиеся карточки меню -->
+                    <div
+                        class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                        <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                            <div
+                                class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">
+                                contact</div>
                         </div>
                     </div>
-                    
-                    <!-- Блок 2: Design -->
-                    <div class="relative bg-gray-100 rounded-md flex flex-col justify-end gap-5 p-5 transition-transform duration-300 w-1/2 hover:aspect-square hover:bg-blue-300" style="background-image: url('/path/to/web-image.jpg'); background-size: cover; background-position: center;">
-                        <div class="relative z-10">
-                            <div class="text-stone-900 text-2xl font-medium leading-normal">Design</div>
+
+                    <div
+                        class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                        <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                            <div
+                                class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">
+                                home</div>
                         </div>
                     </div>
-                </div>
-                <div class="flex gap-2.5">
-                    <!-- Блок 3: Web -->
-                    <div class="relative bg-gray-100 rounded-md flex flex-col justify-end gap-5 p-5 transition-transform duration-300 w-1/2 hover:aspect-square hover:bg-blue-300" style="background-image: url('/path/to/design-image.jpg'); background-size: cover; background-position: center;">
-                        <div class="relative z-10">
-                            <div class="text-stone-900 text-2xl font-medium leading-normal">Web</div>
+
+                    <div
+                        class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                        <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                            <div
+                                class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">
+                                resources</div>
                         </div>
                     </div>
-                    
-                    <!-- Блок 4: Product -->
-                    <div class="relative bg-gray-100 rounded-md flex flex-col justify-end gap-5 p-5 transition-transform duration-300 w-1/2 hover:aspect-square hover:bg-blue-300" style="background-image: url('/path/to/product-image.jpg'); background-size: cover; background-position: center;">
-                        <div class="relative z-10">
-                            <div class="text-stone-900 text-2xl font-medium leading-normal">Product</div>
+
+                    <div
+                        class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                        <div class="w-[190px] h-[191px] p-2.5 rounded-[10px] justify-end items-start gap-2.5 flex">
+                            <div
+                                class="w-5 h-5 px-3.5 py-2.5 bg-[#f71735] rounded-[50px] border-2 border-[#f0f0f0] flex items-center justify-center">
+                                <div class="text-[#f0f0f0] text-xs font-medium font-['TT Firs Neue Trl'] leading-3">2
+                                </div>
+                            </div>
+                        </div>
+                        <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                            <div
+                                class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">
+                                about</div>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Нижняя часть -->
-            <div class="w-full h-20 p-5 bg-stone-900 rounded-lg border flex justify-between items-center">
-                <span class="text-white text-base font-light">Complex solutions for your business growth</span>
-                <div class="flex items-center gap-2.5">
-                    <div class="w-10 h-10 bg-gray-100 rounded border-2 border-gray-100 flex justify-center items-center">
-                        <div class="w-5 h-5 relative">
-                            <div class="w-4 h-4 absolute"></div>
+
+                    <div
+                        class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                        <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                            <div
+                                class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">
+                                work</div>
                         </div>
                     </div>
-                    <div class="w-10 h-10 bg-blue-400 rounded border-2 border-gray-100 flex justify-center items-center">
-                        <div class="w-3 h-5 relative"></div>
+
+                    <div
+                        class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                        <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                            <div
+                                class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">
+                                about</div>
+                        </div>
                     </div>
-                    <div class="w-10 h-10 bg-gradient-to-tl from-rose-600 to-blue-400 rounded border-2 border-gray-100 flex justify-center items-center"></div>
+
+                    <div
+                        class="w-full h-[190.50px] bg-[#f0f0f0] rounded-[10px] flex-col justify-end items-start gap-5 flex shuffle-hover">
+                        <div class="w-[190px] h-[191px] p-2.5 rounded-[10px] justify-end items-start gap-2.5 flex">
+                            <div
+                                class="w-5 h-5 px-3.5 py-2.5 bg-[#f71735] rounded-[50px] border-2 border-[#f0f0f0] flex items-center justify-center">
+                                <div class="text-[#f0f0f0] text-xs font-medium font-['TT Firs Neue Trl'] leading-3">1
+                                </div>
+                            </div>
+                        </div>
+                        <div class="self-stretch p-5 justify-start items-center gap-2.5 flex">
+                            <div
+                                class="text-[#1d1d1d] text-2xl font-medium font-['TT Firs Neue Trl'] leading-normal tn-atom">
+                                brief</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        </div>
-    </div>
+        <div class="w-full flex items-center gap-2.5 z-50 p-5 pb-2.5 bg-white fixed">
+            <div class="flex-grow xl:flex-none xl:w-[auto] h-[90px] p-5 bg-gray-100 rounded-md flex items-center">
+                <div class="xl:w-full">
+                    <img src="/img/BigmaLogo.svg" alt="Bigma Logo">
+                </div>
+            </div>
 
-    <!-- Дополнительные секции -->
-    <div class="w-full h-96 flex flex-col gap-10">
-        <div class="h-36 flex flex-col gap-10">
-            <p class="w-56 opacity-60 text-white text-sm font-light">Recopile un paquete de servicios específicamente para su caso.</p>
-            <h2 class="self-stretch text-white text-3xl font-medium">¿en qué etapa se encuentra tu proyecto?</h2>
-        </div>
-        <div class="self-stretch h-44 flex flex-col gap-1">
-            <div class="self-stretch p-5 bg-white rounded border border-gray-100 flex items-center gap-5">
-                <div class="w-1.5 h-1.5 bg-rose-600 rounded-full"></div>
-                <span class="text-stone-900 text-lg font-medium">Solo idea</span>
-            </div>
-            <div class="self-stretch p-5 bg-white rounded border border-gray-100 flex items-center gap-5">
-                <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
-                <span class="text-stone-900 text-lg font-medium">Proyecto en progreso</span>
-            </div>
-            <div class="self-stretch p-5 bg-white rounded border border-gray-100 flex items-center gap-5">
-                <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
-                <span class="text-stone-900 text-lg font-medium">Negocio en funcionamiento</span>
-            </div>
-        </div>
-    </div>
+            <div class="flex items-center gap-2.5 xl:flex-grow xl:justify-between">
+                <div class="w-[90px] h-[90px] p-5 bg-gray-100 rounded-md flex justify-center items-center">
+                    <div class="flex-none">
+                        <img src="/img/flag-es.svg" alt="Spanish Flag">
+                    </div>
+                </div>
 
-
-    <div class="w-full h-72 flex flex-col justify-start items-start gap-1">
-        <div class="self-stretch h-72 p-5 bg-white rounded border border-gray-100 flex flex-col justify-between items-start">
-            <div class="w-full flex-wrap flex">
-                <div class="px-2.5 py-1 bg-gray-100 rounded-3xl border border-white"> 
-                    <div class="text-stone-900 text-base font-normal leading-tight whitespace-nowrap">social media</div>
+                <div
+                    class="w-[90px] h-[90px] bg-gray-100 rounded-md flex justify-center items-center px-5 xl:flex-grow xl:justify-between">
+                    <nav class="gap-10 items-center hidden xl:flex flex-grow">
+                        <a href="#" class="text-stone-900 text-2xl font-normal px-2">home</a>
+                        <a href="#" class="text-stone-900/40 text-2xl font-normal px-2">services</a>
+                        <a href="#" class="text-stone-900/40 text-2xl font-normal px-2">work</a>
+                        <a href="#" class="text-stone-900/40 text-2xl font-normal px-2">about</a>
+                        <a href="#" class="text-stone-900/40 text-2xl font-normal px-2">resources</a>
+                        <a href="#" class="text-stone-900/40 text-2xl font-normal px-2">contact</a>
+                    </nav>
+                    <div class="hidden xl:flex flex-none ml-auto">
+                        <div class="w-24 h-11 px-5 py-2.5 bg-rose-600 rounded-3xl flex justify-center items-center">
+                            <span class="text-white text-2xl font-medium">brief</span>
+                        </div>
+                    </div>
+                    <div class="block xl:hidden menu-btn" onclick="toggleMenu()">
+                        <div class="w-8 h-0.5 bg-gray-800 mb-1"></div>
+                        <div class="w-8 h-0.5 bg-gray-800 mb-1"></div>
+                        <div class="w-8 h-0.5 bg-gray-800"></div>
+                    </div>
                 </div>
-                <div class="px-2.5 py-1 bg-gray-100 rounded-3xl border border-white">
-                    <div class="text-stone-900 text-base font-normal leading-tight whitespace-nowrap">seo</div>
-                </div>
-                <div class="px-2.5 py-1 bg-gray-100 rounded-3xl border border-white">
-                    <div class="text-stone-900 text-base font-normal leading-tight whitespace-nowrap">marketing strategy</div>
-                </div>
-                <div class="px-2.5 py-1 bg-gray-100 rounded-3xl border border-white">
-                    <div class="text-stone-900 text-base font-normal leading-tight whitespace-nowrap">product</div>
-                </div>
-                <div class="px-2.5 py-1 bg-gray-100 rounded-3xl border border-white">
-                    <div class="text-stone-900 text-base font-normal leading-tight whitespace-nowrap">website</div>
-                </div>
-                <div class="px-2.5 py-1 bg-rose-600 rounded-3xl border border-white">
-                    <div class="text-white text-base font-normal leading-tight whitespace-nowrap">improvements checklist</div>
-                </div>
-            </div>
-            <div class="self-stretch flex justify-between items-center">
-                <div class="text-stone-900 text-2xl font-medium leading-tight">audit</div>
-                <div class="w-5 h-5 bg-stone-900 rounded-3xl border border-gray-100"></div>
             </div>
         </div>
+        <div class="content">
+        <!-- Основное содержимое -->
+        <div class="w-full flex flex-col gap-5 ">
 
+            <div class="w-full p-5 rounded-md flex flex-col gap-2.5 z-10">
+
+                <!-- Секция с заголовком и основным изображением -->
+                <div
+                    class="w-full h-[500px] p-5 bg-gray-100 rounded-md border flex flex-col justify-end gap-2.5 mt-[6.70rem]">
+                    <div class="flex flex-col justify-center items-start gap-5">
+                        <h1 class="text-black text-3xl font-medium">Digital Empathy</h1>
+                    </div>
+                </div>
+                <!-- Карточки -->
+                <div class="flex flex-col gap-2.5">
+                    <div class="flex gap-2.5">
+                        <!-- Блок 1: Strategy -->
+                        <div class="relative bg-gray-100 rounded-md flex flex-col justify-end gap-5 p-5 
+                     w-1/2 hover:aspect-square"
+                            style="background-image: url('/img/StrategyCard.svg'); background-size: cover; background-position: center;">
+                            <div class="relative z-10">
+                                <div class="text-stone-900 text-2xl font-medium leading-normal">Strategy</div>
+                            </div>
+                        </div>
+
+                        <!-- Блок 2: Design -->
+                        <div class="relative bg-gray-100 rounded-md flex flex-col justify-end gap-5 p-5 transition-transform duration-300 w-1/2 hover:aspect-square hover:bg-blue-300"
+                            style="background-image: url('/path/to/web-image.jpg'); background-size: cover; background-position: center;">
+                            <div class="relative z-10">
+                                <div class="text-stone-900 text-2xl font-medium leading-normal">Design</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2.5">
+                        <!-- Блок 3: Web -->
+                        <div class="relative bg-gray-100 rounded-md flex flex-col justify-end gap-5 p-5 transition-transform duration-300 w-1/2 hover:aspect-square hover:bg-blue-300"
+                            style="background-image: url('/path/to/design-image.jpg'); background-size: cover; background-position: center;">
+                            <div class="relative z-10">
+                                <div class="text-stone-900 text-2xl font-medium leading-normal">Web</div>
+                            </div>
+                        </div>
+
+                        <!-- Блок 4: Product -->
+                        <div class="relative bg-gray-100 rounded-md flex flex-col justify-end gap-5 p-5 transition-transform duration-300 w-1/2 hover:aspect-square hover:bg-blue-300"
+                            style="background-image: url('/path/to/product-image.jpg'); background-size: cover; background-position: center;">
+                            <div class="relative z-10">
+                                <div class="text-stone-900 text-2xl font-medium leading-normal">Product</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="">
+                    <div id="scroll-container" class="relative">
+                        <!-- Начальное положение -->
+                        <div id="initial"
+                            class="w-full h-20 p-5 bg-stone-900 rounded-lg border border-gray-800 flex justify-between items-center">
+                            <span class="text-white text-base font-light">Complex solutions for your business
+                                growth</span>
+                            <div class="flex items-center gap-2.5">
+                                <div
+                                    class="w-10 h-10 bg-gray-100 rounded border-2 border-gray-100 flex justify-center items-center">
+                                </div>
+                                <div
+                                    class="w-10 h-10 bg-blue-400 rounded border-2 border-gray-100 flex justify-center items-center">
+                                </div>
+                                <div
+                                    class="w-10 h-10 bg-gradient-to-tl from-rose-600 to-blue-400 rounded border-2 border-gray-100 flex justify-center items-center">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Расширенное положение -->
+                        <div id="expanded"
+                            class="w-full overflow-hidden transition-max-height max-height-0 bg-stone-900 rounded-lg border border-gray-800 p-5 hidden">
+                            <div class="flex flex-col justify-between items-start">
+                                <div class="self-stretch h-80 flex flex-col justify-between">
+                                    <div class="w-72 text-gray-100 text-2xl font-medium">paquetes completos de nuestros
+                                        especialistas para tu negocio</div>
+                                    <div class="self-stretch flex justify-start gap-7">
+                                        <div class="flex flex-col gap-7">
+                                            <div class="flex items-center gap-2.5">
+                                                <div
+                                                    class="w-10 h-10 bg-gray-100 rounded border-2 border-gray-900 flex justify-center items-center">
+                                                </div>
+                                                <div class="text-gray-100 text-lg font-normal">web starter</div>
+                                            </div>
+                                            <div class="flex items-center gap-2.5">
+                                                <div
+                                                    class="w-10 h-10 bg-gray-100 rounded border-2 border-gray-900 flex justify-center items-center">
+                                                </div>
+                                                <div class="text-gray-100 text-lg font-normal">smm pack</div>
+                                            </div>
+                                            <div class="flex items-center gap-2.5">
+                                                <div
+                                                    class="w-10 h-10 bg-gray-100 rounded border-2 border-gray-900 flex justify-center items-center">
+                                                </div>
+                                                <div class="text-gray-100 text-lg font-normal">shop starter</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col gap-7">
+                                            <div class="flex items-center gap-2.5">
+                                                <div
+                                                    class="w-10 h-10 bg-gray-100 rounded border-2 border-gray-900 flex justify-center items-center">
+                                                </div>
+                                                <div class="text-gray-100 text-lg font-normal">brand pack</div>
+                                            </div>
+                                            <div class="flex items-center gap-2.5">
+                                                <div
+                                                    class="w-10 h-10 bg-gray-100 rounded border-2 border-gray-900 flex justify-center items-center">
+                                                </div>
+                                                <div class="text-gray-100 text-lg font-normal">web pro</div>
+                                            </div>
+                                            <div class="flex items-center gap-2.5">
+                                                <div
+                                                    class="w-10 h-10 bg-gray-100 rounded border-2 border-gray-900 flex justify-center items-center">
+                                                </div>
+                                                <div class="text-gray-100 text-lg font-normal">full pack</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="self-stretch flex justify-between items-center gap-9 mt-16">
+                                    <div class="w-44 text-gray-100 text-base font-light">Complex solutions for your
+                                        business
+                                        growth</div>
+                                    <div class="flex justify-end items-center gap-2.5">
+                                        <div
+                                            class="px-2.5 py-1 bg-red-600 rounded-3xl border border-red-600 text-white">
+                                            more solutions</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="w-full h-72 flex flex-col justify-start items-start ">
+                    <div
+                        class="self-stretch h-72 p-5 bg-white rounded border border-gray-100 flex flex-col justify-between items-start">
+                        <div class="w-full flex-wrap flex">
+                            <div class="px-2.5 py-1 bg-gray-100 rounded-3xl border border-white">
+                                <div class="text-stone-900 text-base font-normal leading-tight whitespace-nowrap">social
+                                    media</div>
+                            </div>
+                            <div class="px-2.5 py-1 bg-gray-100 rounded-3xl border border-white">
+                                <div class="text-stone-900 text-base font-normal leading-tight whitespace-nowrap">seo
+                                </div>
+                            </div>
+                            <div class="px-2.5 py-1 bg-gray-100 rounded-3xl border border-white">
+                                <div class="text-stone-900 text-base font-normal leading-tight whitespace-nowrap">
+                                    marketing
+                                    strategy
+                                </div>
+                            </div>
+                            <div class="px-2.5 py-1 bg-gray-100 rounded-3xl border border-white">
+                                <div class="text-stone-900 text-base font-normal leading-tight whitespace-nowrap">
+                                    product
+                                </div>
+                            </div>
+                            <div class="px-2.5 py-1 bg-gray-100 rounded-3xl border border-white">
+                                <div class="text-stone-900 text-base font-normal leading-tight whitespace-nowrap">
+                                    website
+                                </div>
+                            </div>
+                            <div class="px-2.5 py-1 bg-rose-600 rounded-3xl border border-white">
+                                <div class="text-white text-base font-normal leading-tight whitespace-nowrap">
+                                    improvements
+                                    checklist
+                                </div>
+                            </div>
+                        </div>
+                        <div class="self-stretch flex justify-between items-center">
+                            <div class="text-stone-900 text-2xl font-medium leading-tight">audit</div>
+                            <div class="w-5 h-5 bg-stone-900 rounded-3xl border border-gray-100"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+</div>
+
+<canvas id="neuro" class="z-0"></canvas>
+
+        <script type="x-shader/x-fragment" id="vertShader">
+        precision mediump float;
+        varying vec2 vUv;
+        attribute vec2 a_position;
+        void main() {
+            vUv = .5 * (a_position + 1.);
+            gl_Position = vec4(a_position, 0.0, 1.0);
+        }
+        </script>
+
+        <script type="x-shader/x-fragment" id="fragShader">
+            precision mediump float;
+        
+            varying vec2 vUv;
+            uniform float u_time;
+            uniform float u_ratio;
+            uniform vec2 u_pointer_position;
+            uniform float u_scroll_progress;
+        
+            vec2 rotate(vec2 uv, float th) {
+                return mat2(cos(th), sin(th), -sin(th), cos(th)) * uv;
+            }
+        
+            float neuro_shape(vec2 uv, float t, float p) {
+                vec2 sine_acc = vec2(0.);
+                vec2 res = vec2(0.);
+                float scale = 8.;
+        
+                for (int j = 0; j < 15; j++) {
+                    uv = rotate(uv, 1.);
+                    sine_acc = rotate(sine_acc, 1.);
+                    vec2 layer = uv * scale + float(j) + sine_acc - t;
+                    sine_acc += sin(layer);
+                    res += (.5 + .5 * cos(layer)) / scale;
+                    scale *= (1.2 - .07 * p);
+                }
+                return res.x + res.y;
+            }
+        
+            void main() {
+                vec2 uv = .5 * vUv;
+                uv.x *= u_ratio;
+        
+                vec2 pointer = vUv - u_pointer_position;
+                pointer.x *= u_ratio;
+                float p = clamp(length(pointer), 0., 1.);
+                p = .5 * pow(1. - p, 2.);
+        
+                float t = .001 * u_time;
+                vec3 color = vec3(0.);
+        
+                float noise = neuro_shape(uv, t, p);
+        
+                noise = 1.2 * pow(noise, 3.);
+                noise += pow(noise, 10.);
+                noise = max(.0, noise - .5);
+                noise *= (1. - length(vUv - .5));
+        
+                // Используем фиксированный цвет F71735
+                vec3 fixedColor = vec3(247.0 / 255.0, 23.0 / 255.0, 53.0 / 255.0);
+                color = fixedColor * noise;
+        
+                gl_FragColor = vec4(color, noise);
+            }
+        </script>
+        
 
     <script>
-        const menuBtn = document.querySelector('.menu-btn');
-        const mobileMenu = document.getElementById('mobileMenu');
+        const containerEl = document.querySelector(".container");
+        const canvasEl = document.querySelector("canvas#neuro");
+        const devicePixelRatio = Math.min(window.devicePixelRatio, 2);
 
-        menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('open');
-            mobileMenu.classList.toggle('translate-x-0');
-            mobileMenu.classList.toggle('-translate-x-full');
-        });
-    </script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    jQuery(document).ready(function($) {
-      var shuffleElement = $('.shuffle-hover .tn-atom');
-      shuffleElement.each(function() {
-        $(this).attr('data-text', $(this).text());
-      });
+        const pointer = {
+            x: 0,
+            y: 0,
+            tX: 0,
+            tY: 0,
+        };
 
-      var animationInProgress = false;
+        let uniforms;
+        const gl = initShader();
 
-      shuffleElement.mouseenter(function() {
-        if (animationInProgress) return;
+        setupEvents();
 
-        var element = $(this);
-        var originalText = element.data('text');
-        var animationDuration = 500;
-        animationInProgress = true;
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
 
-        shuffleText(element, originalText, animationDuration, function() {
-          animationInProgress = false;
-        });
-      });
+        render();
 
-      shuffleElement.mouseleave(function() {
-        var element = $(this);
-        var originalText = element.data('text');
+        function initShader() {
+            const vsSource = document.getElementById("vertShader").innerHTML;
+            const fsSource = document.getElementById("fragShader").innerHTML;
 
-        element.text(originalText.toLowerCase());
-      });
+            const gl = canvasEl.getContext("webgl") || canvasEl.getContext("experimental-webgl");
 
-      function shuffleText(element, originalText, duration, onComplete) {
-        var elementTextArray = originalText.split('');
-        var currentIndex = 0;
-
-        function shuffleStep() {
-          if (currentIndex < elementTextArray.length) {
-            var randomIndex = Math.floor(Math.random() * elementTextArray.length);
-            var temp = elementTextArray[currentIndex];
-            elementTextArray[currentIndex] = elementTextArray[randomIndex];
-            elementTextArray[randomIndex] = temp;
-
-            // Хаотичное изменение регистра
-            for (var i = 0; i < elementTextArray.length; i++) {
-              elementTextArray[i] = Math.random() > 0.5 ? elementTextArray[i].toUpperCase() : elementTextArray[i].toLowerCase();
+            if (!gl) {
+                alert("WebGL is not supported by your browser.");
             }
 
-            element.text(elementTextArray.join(''));
-            currentIndex++;
-            setTimeout(shuffleStep, duration / elementTextArray.length);
-          } else {
-            // Хаотичное изменение регистра для финального текста
-            var finalTextArray = originalText.split('').map(char =>
-              Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase()
-            );
-            element.text(finalTextArray.join(''));
-            onComplete();
-          }
+            function createShader(gl, sourceCode, type) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, sourceCode);
+                gl.compileShader(shader);
+
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error("An error occurred compiling the shaders: " + gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+
+                return shader;
+            }
+
+            const vertexShader = createShader(gl, vsSource, gl.VERTEX_SHADER);
+            const fragmentShader = createShader(gl, fsSource, gl.FRAGMENT_SHADER);
+
+            function createShaderProgram(gl, vertexShader, fragmentShader) {
+                const program = gl.createProgram();
+                gl.attachShader(program, vertexShader);
+                gl.attachShader(program, fragmentShader);
+                gl.linkProgram(program);
+
+                if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                    console.error("Unable to initialize the shader program: " + gl.getProgramInfoLog(program));
+                    return null;
+                }
+
+                return program;
+            }
+
+            const shaderProgram = createShaderProgram(gl, vertexShader, fragmentShader);
+            uniforms = getUniforms(shaderProgram);
+
+            function getUniforms(program) {
+                let uniforms = [];
+                let uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+                for (let i = 0; i < uniformCount; i++) {
+                    let uniformName = gl.getActiveUniform(program, i).name;
+                    uniforms[uniformName] = gl.getUniformLocation(program, uniformName);
+                }
+                return uniforms;
+            }
+
+            const vertices = new Float32Array([-1., -1., 1., -1., -1., 1., 1., 1.]);
+
+            const vertexBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+            gl.useProgram(shaderProgram);
+
+            const positionLocation = gl.getAttribLocation(shaderProgram, "a_position");
+            gl.enableVertexAttribArray(positionLocation);
+
+            gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+            return gl;
         }
 
-        shuffleStep();
-      }
-    });
-  </script>
-</body>
+        function render() {
+            const currentTime = performance.now();
+
+            pointer.x += (pointer.tX - pointer.x) * .5;
+            pointer.y += (pointer.tY - pointer.y) * .5;
+
+            gl.uniform1f(uniforms.u_time, currentTime);
+            gl.uniform2f(uniforms.u_pointer_position, pointer.x / window.innerWidth, 1 - pointer.y / window.innerHeight);
+            gl.uniform1f(uniforms.u_scroll_progress, window["pageYOffset"] / (2 * window.innerHeight));
+
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+            requestAnimationFrame(render);
+        }
+
+        function resizeCanvas() {
+            canvasEl.width = window.innerWidth * devicePixelRatio;
+            canvasEl.height = window.innerHeight * devicePixelRatio;
+            gl.uniform1f(uniforms.u_ratio, canvasEl.width / canvasEl.height);
+            gl.viewport(0, 0, canvasEl.width, canvasEl.height);
+        }
+
+        function setupEvents() {
+            window.addEventListener("pointermove", e => {
+                updateMousePosition(e.clientX, e.clientY);
+            });
+            window.addEventListener("touchmove", e => {
+                updateMousePosition(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
+            });
+            window.addEventListener("click", e => {
+                updateMousePosition(e.clientX, e.clientY);
+            });
+
+            function updateMousePosition(eX, eY) {
+                pointer.tX = eX;
+                pointer.tY = eY;
+            }
+        }
+    </script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            const menuBtn = document.querySelector('.menu-btn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            menuBtn.addEventListener('click', () => {
+                menuBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('translate-x-0');
+                mobileMenu.classList.toggle('-translate-x-full');
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const shuffleElements = document.querySelectorAll('.shuffle-hover .tn-atom');
+
+                shuffleElements.forEach(element => {
+                    element.dataset.text = element.textContent;
+
+                    element.addEventListener('mouseenter', () => {
+                        shuffleText(element, element.dataset.text, 500);
+                    });
+
+                    element.addEventListener('mouseleave', () => {
+                        element.textContent = element.dataset.text; // Восстановление оригинального текста при уходе курсора
+                    });
+                });
+
+                let animationInProgress = false;
+
+                function shuffleText(element, originalText, duration) {
+                    if (animationInProgress) return;
+                    animationInProgress = true;
+
+                    const textArray = originalText.replace(/\s+/g, '').split(''); // Удаление пробелов и разбиение на массив символов
+                    let shuffledArray = [...textArray]; // Создание копии массива для шафла
+                    let currentIndex = 0;
+
+                    const shuffleStep = () => {
+                        if (currentIndex < textArray.length) {
+                            const randomIndex = Math.floor(Math.random() * shuffledArray.length);
+                            [shuffledArray[currentIndex], shuffledArray[randomIndex]] = [shuffledArray[randomIndex], shuffledArray[currentIndex]];
+
+                            // Обновление текста с текущим шагом шафла
+                            element.textContent = shuffledArray.map(char => Math.random() > 0.5 ? char.toUpperCase() : char.toLowerCase()).join('');
+                            currentIndex++;
+                            setTimeout(shuffleStep, duration / textArray.length);
+                        } else {
+                            // Завершение анимации, текст в верхнем регистре
+                            element.textContent = originalText.toUpperCase();
+                            animationInProgress = false;
+                        }
+                    };
+
+                    shuffleStep();
+                }
+            });
+        </script>
+
+        <script>
+            document.addEventListener("scroll", function () {
+                const initial = document.getElementById("initial");
+                const expanded = document.getElementById("expanded");
+
+                const scrollY = window.scrollY || window.pageYOffset;
+
+                if (scrollY > 200) {
+                    initial.classList.add("hidden");
+                    expanded.classList.remove("hidden");
+                    expanded.classList.add("max-height-full");
+                    expanded.classList.remove("max-height-0");
+                } else {
+                    initial.classList.remove("hidden");
+                    expanded.classList.add("hidden");
+                    expanded.classList.add("max-height-0");
+                    expanded.classList.remove("max-height-full");
+                }
+            });
+        </script>
+
+    </body>
+
 </html>
